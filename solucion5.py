@@ -1,6 +1,6 @@
 import os
 
-def guardar_tabla_multiplicar(numero):
+def registrarTabla(numero):
     if numero < 1 or numero > 10:
         print("El número debe estar entre 1 y 10.")
         return
@@ -10,7 +10,7 @@ def guardar_tabla_multiplicar(numero):
             archivo.write(f"{numero} x {i} = {numero*i}\n")
     print(f"La tabla de multiplicar del {numero} ha sido guardada en 'tabla-{numero}.txt'")
 
-def mostrar_tabla_multiplicar(numero):
+def mostrarTabla(numero):
     try:
         with open(f"tabla-{numero}.txt", "r") as archivo:
             print(f"Tabla de multiplicar del {numero}:")
@@ -19,7 +19,7 @@ def mostrar_tabla_multiplicar(numero):
     except FileNotFoundError:
         print(f"El archivo 'tabla-{numero}.txt' no existe.")
 
-def mostrar_linea_tabla_multiplicar(numero, linea):
+def mostrarLineaTabla(numero, linea):
     try:
         with open(f"tabla-{numero}.txt", "r") as archivo:
             lineas = archivo.readlines()
@@ -42,14 +42,14 @@ def menu():
 
         if opcion == "1":
             numero = int(input("Ingrese un número entre 1 y 10: "))
-            guardar_tabla_multiplicar(numero)
+            registrarTabla(numero)
         elif opcion == "2":
             numero = int(input("Ingrese un número entre 1 y 10: "))
-            mostrar_tabla_multiplicar(numero)
+            mostrarTabla(numero)
         elif opcion == "3":
             numero = int(input("Ingrese un número entre 1 y 10: "))
             linea = int(input("Ingrese el número de línea a mostrar: "))
-            mostrar_linea_tabla_multiplicar(numero, linea)
+            mostrarLineaTabla(numero, linea)
         elif opcion == "4":
             print("¡Hasta luego!")
             break
