@@ -34,27 +34,17 @@ def mostrar_contenido_tabla(cursor):
 
 if __name__ == "__main__":
     token = "apis-token-8064.24WcKWHvesgGHUSAvvmRqEjZ5igHQvDa"
-
-    # Obtener datos del tipo de cambio del año 2023
     datos_dolar_2023 = obtenerDatos(token)
 
     if datos_dolar_2023:
-        # Conectar a la base de datos
         conexion = sqlite3.connect('base.db')
         cursor = conexion.cursor()
-
-        # Crear tabla 'sunat_info'
         crear_tabla_sunat_info(cursor)
-
-        # Insertar datos en la tabla 'sunat_info'
         datos_insertar = [(dia[0], dia[1], dia[2]) for dia in datos_dolar_2023]
         insertar_datos_sunat_info(cursor, datos_insertar)
 
-        # Guardar cambios y cerrar conexión
         conexion.commit()
         #conexion.close()
-
-        # Mostrar contenido de la tabla 'sunat_info'
         print("\nContenido de la tabla 'sunat_info':")
         mostrar_contenido_tabla(cursor)
     else:
