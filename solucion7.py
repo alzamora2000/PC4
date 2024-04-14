@@ -13,7 +13,7 @@ def obtenerDatos(token):
         print("Error al obtener los datos del tipo de cambio del año 2023.")
         return None
 
-def crear_tabla_sunat_info(cursor):
+def crearTabla(cursor):
     cursor.execute('''CREATE TABLE IF NOT EXISTS sunat_info (
                         fecha TEXT PRIMARY KEY,
                         precio_compra INT,
@@ -21,12 +21,12 @@ def crear_tabla_sunat_info(cursor):
                     )''')
     print("Tabla 'sunat_info' creada correctamente.")
 
-def insertar_datos_sunat_info(cursor, datos):
+def insertarDatos(cursor, datos):
     cursor.executemany('''INSERT OR IGNORE INTO sunat_info (fecha, precio_compra, precio_venta) 
                            VALUES (?, ?, ?)''', datos)
     print("Datos insertados correctamente.")
 
-def mostrar_contenido_tabla(cursor):
+def mostrarDatos(cursor):
     cursor.execute("SELECT * FROM sunat_info")
     rows = cursor.fetchall()
     for row in rows:
@@ -39,13 +39,13 @@ if __name__ == "__main__":
     if datos_dolar_2023:
         conexion = sqlite3.connect('base.db')
         cursor = conexion.cursor()
-        crear_tabla_sunat_info(cursor)
+        crearTabla(cursor)
         datos_insertar = [(dia[0], dia[1], dia[2]) for dia in datos_dolar_2023]
-        insertar_datos_sunat_info(cursor, datos_insertar)
+        insertarDatos(cursor, datos_insertar)
 
         conexion.commit()
         #conexion.close()
         print("\nContenido de la tabla 'sunat_info':")
-        mostrar_contenido_tabla(cursor)
+        mostrarDatos(cursor)
     else:
         print("No se pudieron obtener los datos del tipo de cambio del año 2023.")
