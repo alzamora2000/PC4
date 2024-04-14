@@ -12,7 +12,8 @@ def obtener_datos_bitcoin():
         return None
 
 def obtener_tipo_cambio_pen(moneda):
-    url = f"https://api.apis.net.pe/v1/tipo-cambio/{date.today().year}"
+    
+    url = f"https://api.apis.net.pe/v2/sunat/tipo-cambio/date={date.today()}"
     response = requests.get(url)
     if response.status_code == 200:
         datos = response.json()
