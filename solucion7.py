@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
         # Guardar cambios y cerrar conexión
         conexion.commit()
-        conexion.close()
+        #conexion.close()
 
         # Mostrar contenido de la tabla 'sunat_info'
         print("\nContenido de la tabla 'sunat_info':")
